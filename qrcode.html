@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JWT e QR Code</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsrsasign/10.5.22/jsrsasign-all-min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+</head>
+<body>
+    <div>
+        <h2>JWT Token</h2>
+        <textarea id="jwtToken" rows="4" cols="50" readonly></textarea>
+    </div>
+    <div>
+        <h2>QR Code</h2>
+        <canvas id="qrcode"></canvas>
+    </div>
+    <div>
+        <button onclick="generateQRCode()">Genera QR Code</button>
+    </div>
+    <script>
+        // Chiave segreta per firmare il token
+        const secretKey = "la_tua_chiave_segreta";
+
+        // Funzione per generare il JWT e il QR Code
+        function generateQRCode() {
+            // Calcolare la scadenza del token (30 minuti da ora)
+            const now = Math.floor(Date.now() / 1000); // Tempo corrente in secondi
+            const exp = now + (30 * 60); // Scadenza in 30 minuti
+
+            // Definizione del payload
+            const payload = {
+                user_id: 123,
+                exp: exp // Timestamp Unix per la scadenza
+            };
+
+            // Definizione dell'header
+            const header = { alg: "HS256", typ: "JWT" };
+
+            // Generazione del token
+            const sHeader = JSON.stringify(header);
+            const sPayload = JSON.stringify(payload);
+            const token = KJUR.jws.JWS.sign("HS256", sHeader, sPayload, { utf8: secretKey });
+            document.getElementById('jwtToken').value = token;
+
+            // Generazione del QR Code
+            QRCode.toCanvas(document.getElementById('qrcode'), token, function (error) {
+                if (error) console.error(error);
+                else console.log('QR Code generato con successo!');
+            });
+        }
+    </script>
+</body>
+</html>
