@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JWT e QR Code</title>
+    <title>Genera QRCode</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jsrsasign/10.5.22/jsrsasign-all-min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
 </head>
 <body>
     <div>
-        <h2>JWT Token</h2>
+        <h2>Inserisci Una Stringa per generare il QRCode</h2>
         <textarea id="jwtToken" rows="4" cols="50"></textarea>
     </div>
     <div>
@@ -17,7 +17,7 @@
         <canvas id="qrcode"></canvas>
     </div>
     <div>
-        <button onclick="generateQRCode()">Genera QR Code</button>
+        <button onclick="generateQRCode()">Genera QRCode</button>
     </div>
     <script>
         // Chiave segreta per firmare il token
