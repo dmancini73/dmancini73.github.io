@@ -35,10 +35,10 @@
 
         // Funzione per generare il JWT e il QR Code
         function generateQRCode() {
-            alert("Teampo validità in minuti: " + document.getElementById('tempo'));
+            alert("Teampo validità in minuti: " + document.getElementById('tempo').value);
             // Calcolare la scadenza del token (30 minuti da ora)
             const now = Math.floor(Date.now() / 1000); // Tempo corrente in secondi
-            const exp = now + (document.getElementById('tempo') * 60); // Scadenza in 30 minuti
+            const exp = now + (document.getElementById('tempo').value * 60); // Scadenza in 30 minuti
 
             // Definizione del payload
             const payload = {
