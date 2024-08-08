@@ -10,6 +10,16 @@
 <body>
     <div>
         <h2>JWT Token</h2>
+        <select id="tempo">
+            <option value="1">1 Minuto</option>
+            <option value="5">5 Minuti</option>
+            <option value="10">10 Minuti</option>
+            <option value="30">30 Minuti</option>
+            <option value="60">1 Ora</option>
+            <option value="120">2 Ore</option>
+            <option value="1440">1 Giorno</option>
+            <option value="14400">10 Giorn1</option>
+        </select>
         <textarea id="jwtToken" rows="4" cols="50" readonly></textarea>
     </div>
     <div>
@@ -25,9 +35,10 @@
 
         // Funzione per generare il JWT e il QR Code
         function generateQRCode() {
+            alert("Teampo validità in minuti: " + document.getElementById('tempo'));
             // Calcolare la scadenza del token (30 minuti da ora)
             const now = Math.floor(Date.now() / 1000); // Tempo corrente in secondi
-            const exp = now + (30 * 60); // Scadenza in 30 minuti
+            const exp = now + (document.getElementById('tempo') * 60); // Scadenza in 30 minuti
 
             // Definizione del payload
             const payload = {
